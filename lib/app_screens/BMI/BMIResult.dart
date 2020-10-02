@@ -5,6 +5,22 @@ class BMIResults extends StatelessWidget{
   final double weight;
   BMIResults(this.height, this.weight);
 
+  String _calcBMI(double bmi){
+    var result = 'Low weight';
+    if (bmi >= 35){
+      result = 'extremely obese';
+    } else if (bmi >= 30){
+      result = 'Lv.2 Obese';
+    } else if (bmi >= 25){
+      result = 'Lv.2 Obese';
+    } else if (bmi >= 23){
+      result = 'Over weight';
+    } else if (bmi >= 18.5){
+      result = 'Normal';
+    }
+    return result;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
