@@ -10,8 +10,8 @@ class Body extends StatelessWidget{
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: TodoListPage(),
-      // home: BMI(),
+      // home: TodoListPage(),
+      home: BMI(),
     );
   }
 }

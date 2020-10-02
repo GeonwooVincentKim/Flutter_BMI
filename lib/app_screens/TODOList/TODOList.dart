@@ -9,6 +9,7 @@ class TodoListPage extends StatefulWidget{
 
 class _TodoListPageState extends State<TodoListPage>{
   final _items = <Todo>[];
+  final _formKey = GlobalKey<FormState>();
   var _todoController = TextEditingController();
 
   @override
@@ -43,28 +44,42 @@ class _TodoListPageState extends State<TodoListPage>{
       ),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
-        child: Column(
-          children: <Widget>[
-            Row(
+        child: Form(
+          key: _formKey,
+          child: Column(
               children: <Widget>[
+                Row(
+                  children: <Widget>[
+                    Expanded(
+                      child: TextFormField(
+                          controller: _todoController,
+                          keyboardType: TextInputType.number,
+                          validator: (value){
+                            if(value.trim().isEmpty){
+                              return "Please Input your Height";
+                            }
+                            return null;
+                          }
+                      ),
+                    ),
+                    RaisedButton(
+                      child: Text("Add"),
+                      onPressed: () {
+                        if(_formKey.currentState.validate()){
+                          _addTodo(Todo(_todoController.text));
+                        }
+                      },
+                    ),
+                  ],
+                ),
                 Expanded(
-                  child: TextField(
-                    controller: _todoController,
+                  child: ListView(
+                    children: _items.map((todo) => _buildItemWidget(todo)).toList(),
                   ),
-                ),
-                RaisedButton(
-                  child: Text("Add"),
-                  onPressed: () => _addTodo(Todo(_todoController.text)),
-                ),
-              ],
-            ),
-            Expanded(
-              child: ListView(
-                children: _items.map((todo) => _buildItemWidget(todo)).toList(),
-              ),
-            )
-          ]
-        )
+                )
+              ]
+          )
+        ),
       ),
     );
   }
