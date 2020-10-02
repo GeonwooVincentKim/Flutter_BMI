@@ -36,7 +36,7 @@ class BMIResults extends StatelessWidget{
       );
     } else {
       return Icon(
-        Icons.sentiment_satisfied,
+        Icons.sentiment_dissatisfied,
         color: Colors.orange,
         size: 100,
       );
