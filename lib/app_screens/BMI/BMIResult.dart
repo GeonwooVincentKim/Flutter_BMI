@@ -21,8 +21,33 @@ class BMIResults extends StatelessWidget{
     return result;
   }
 
+  Widget _buildIcon(double bmi){
+    if (bmi >= 23){
+      return Icon(
+        Icons.sentiment_dissatisfied,
+        color: Colors.red,
+        size: 100,
+      );
+    } else if (bmi >= 18.5){
+      return Icon(
+        Icons.sentiment_satisfied,
+        color: Colors.green,
+        size: 100,
+      );
+    } else {
+      return Icon(
+        Icons.sentiment_satisfied,
+        color: Colors.orange,
+        size: 100,
+      );
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
+    final bmi = weight / ((height / 100) * (height / 100));
+    print("bmi: $bmi");
+
     return Scaffold(
       appBar: AppBar(title: Text("BMI Calculator")),
       body: Center(
@@ -30,15 +55,11 @@ class BMIResults extends StatelessWidget{
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             Text(
-              "Normal",
+              _calcBMI(bmi),
               style: TextStyle(fontSize: 36),
             ),
             SizedBox(height: 16),
-            Icon(
-              Icons.sentiment_satisfied,
-              color: Colors.green,
-              size: 100,
-            ),
+            _buildIcon(bmi),
           ]
         ),
       ),
